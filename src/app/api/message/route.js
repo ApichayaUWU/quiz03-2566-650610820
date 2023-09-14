@@ -28,11 +28,11 @@ export const GET = async (request) => {
 };
 
 export const POST = async (request) => {
-  const body = await request.json();
   readDB();
+  const body = await request.json();
   const roomId = request.nextUrl.searchParams.get("roomId");
-  const f = DB.rooms.findIndex((std) => std.roomId === roomId);
-  if (f === -1) {
+  const f = DB.rooms.find((std) => std.roomId === roomId);
+  if (!f) {
     return NextResponse.json(
       {
         ok: false,
